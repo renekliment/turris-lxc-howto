@@ -21,16 +21,22 @@ Jak OpenWRT, tak Turris OS v kontejneru mají jistě svá využití, nicméně n
 # Instalace prerekvizit
 
 0. Aktualizace seznamu balíků
-```
-opkg update
-```
+
+     ```
+    opkg update
+    ```
+    
 1. Instalace všech LXC balíků (ano, trochu overkill)
-```
-opkg install liblxc luci-app-lxc lxc lxc-attach lxc-autostart lxc-cgroup lxc-checkconfig lxc-clone lxc-common lxc-config lxc-configs lxc-console lxc-create lxc-destroy lxc-device lxc-execute lxc-freeze lxc-hooks lxc-info lxc-init lxc-ls lxc-lua lxc-monitor lxc-monitord lxc-snapshot lxc-start lxc-stop lxc-templates lxc-unfreeze lxc-unshare lxc-user-nic lxc-usernsexec lxc-wait
-```
+
+     ```
+    opkg install liblxc luci-app-lxc lxc lxc-attach lxc-autostart lxc-cgroup lxc-checkconfig lxc-clone lxc-common lxc-config lxc-configs lxc-console lxc-create lxc-destroy lxc-device lxc-execute lxc-freeze lxc-hooks lxc-info lxc-init lxc-ls lxc-lua lxc-monitor lxc-monitord lxc-snapshot lxc-start lxc-stop lxc-templates lxc-unfreeze lxc-unshare lxc-user-nic lxc-usernsexec lxc-wait
+    ```
+    
 2. Instalace dalších potřebných balíků
 
-`opkg install kmod-veth vim wget`
+    ```
+    opkg install kmod-veth vim wget
+    ```
 
 # Instalace Debian PowerPCSPEPort
 
