@@ -70,6 +70,11 @@ vim ./rootfs/etc/resolv.conf
 ```
 a upravíme adresu `127.0.0.1` na IP Turrise (výchozí `192.168.1.1`)
 
+Chceme, aby byl kontejner dostupný i v administračním rozhraní LuCI, odkud se dá také ovládat:
+```
+mkdir -p /lxc/debian1/
+ln -s /mnt/disk/lxc-containers/debian1/lxc-debian1.conf /lxc/debian1/config
+```
 
 Kontejner spustíme a připojíme se k jeho konzoli:
 ```
