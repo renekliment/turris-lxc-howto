@@ -58,11 +58,11 @@ Vytvoříme rootfs pro kontejner:
 debootstrap --no-check-gpg --arch=powerpcspe sid rootfs http://ftp.de.debian.org/debian-ports/
 ```
 
-Vytvoříme konfigurační soubor pro kontejner:
+Vytvoříme konfigurační soubor pro kontejner a upravíme náležitě adresy, cesty, atp.:
 ```  
-vim ./lxc-debian1.conf
+wget https://raw.githubusercontent.com/renekliment/turris-lxc-howto/master/config
+vim ./config
 ```
-a zkopírujeme obsah souboru `lxc-debian1.conf` a upravíme náležitě adresy, cesty, atp.
 
 Nastavíme DNS server pro kontejner:
 ```
@@ -72,13 +72,12 @@ a upravíme adresu `127.0.0.1` na IP Turrise (výchozí `192.168.1.1`)
 
 Chceme, aby byl kontejner dostupný i v administračním rozhraní LuCI, odkud se dá také ovládat:
 ```
-mkdir -p /lxc/debian1/
-ln -s /mnt/disk/lxc-containers/debian1/lxc-debian1.conf /lxc/debian1/config
+ln -s /mnt/disk/lxc-containers/debian1 /srv/lxc/debian1
 ```
 
 Kontejner spustíme a připojíme se k jeho konzoli:
 ```
-lxc-start -n debian1 -f lxc-debian1.conf
+lxc-start -n debian1
 lxc-attach -n debian1
 ```
 
