@@ -29,7 +29,7 @@ Jak OpenWRT, tak Turris OS v kontejneru mají jistě svá využití, nicméně n
 1. Instalace všech LXC balíků (ano, trochu overkill)
 
      ```
-    opkg install liblxc luci-app-lxc lxc lxc-attach lxc-autostart lxc-cgroup lxc-checkconfig lxc-clone lxc-common lxc-config lxc-configs lxc-console lxc-create lxc-destroy lxc-device lxc-execute lxc-freeze lxc-hooks lxc-info lxc-init lxc-ls lxc-lua lxc-monitor lxc-monitord lxc-snapshot lxc-start lxc-stop lxc-templates lxc-unfreeze lxc-unshare lxc-user-nic lxc-usernsexec lxc-wait
+    opkg install liblxc luci-app-lxc lxc lxc-attach lxc-auto lxc-autostart lxc-cgroup lxc-checkconfig lxc-clone lxc-common lxc-config lxc-configs lxc-console lxc-create lxc-destroy lxc-device lxc-execute lxc-freeze lxc-hooks lxc-info lxc-init lxc-ls lxc-lua lxc-monitor lxc-monitord lxc-snapshot lxc-start lxc-stop lxc-templates lxc-unfreeze lxc-unshare lxc-user-nic lxc-usernsexec lxc-wait
     ```
     
 2. Instalace dalších potřebných balíků
@@ -89,7 +89,12 @@ lxc-attach -n debian1
 ... a máme hotovo. Nyní můžeme využívat všechny dostupné _Debianí_ balíky, které jsou dostupné. (bohužel veliké množství balíků není k dispozici, ale je to dostatečné například k nainstalování aplikace Home Assistant pomocí pip3)
 
 # Automatické spuštění
-TODO
+Pokud nemáme, tak 
+```
+opkg install lxc-auto
+```
+
+a v souboru `/etc/config/lxc-auto` jen nastavíme jméno našeho kontejneru.
 
 # Poznámky
 - Je možné provést debootstrap na PC a poté rootfs zkopírovat na Turris, což může být rychlejší. Zde se pracuje pouze na Turrisu kvůli jednoduchosti.
@@ -100,3 +105,4 @@ TODO
 - https://wiki.debian.org/PowerPCSPEPort
 - https://l3net.wordpress.com/2013/11/03/debian-virtualization-lxc-debootstrap-filesystem/
 - https://wiki.debian.org/LXC
+- https://www.turris.cz/doc/cs/howto/lxc#spousteni_kontejneru_pri_startu
