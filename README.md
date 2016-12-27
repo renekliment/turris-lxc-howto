@@ -58,6 +58,11 @@ Vytvoříme rootfs pro kontejner:
 debootstrap --include debian-ports-archive-keyring --arch=powerpcspe sid rootfs https://deb.debian.org/debian-ports/
 ```
 
+Nastavíme správný repositář pro balíčky:
+```
+echo "deb https://deb.debian.org/debian-ports sid main" | cat >> ./rootfs/etc/apt/sources.list
+```
+
 Vytvoříme konfigurační soubor pro kontejner a upravíme náležitě adresy, cesty, atp.:
 ```  
 wget https://raw.githubusercontent.com/renekliment/turris-lxc-howto/master/config
