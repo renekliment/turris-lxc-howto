@@ -55,7 +55,7 @@ cd /mnt/disk/lxc-containers/debian1
 
 Vytvoříme rootfs pro kontejner:
 ```
-debootstrap --no-check-gpg --arch=powerpcspe sid rootfs http://ftp.de.debian.org/debian-ports/
+debootstrap --include debian-ports-archive-keyring --arch=powerpcspe sid rootfs https://deb.debian.org/debian-ports/
 ```
 
 Vytvoříme konfigurační soubor pro kontejner a upravíme náležitě adresy, cesty, atp.:
@@ -79,14 +79,6 @@ Kontejner spustíme a připojíme se k jeho konzoli:
 ```
 lxc-start -n debian1
 lxc-attach -n debian1
-```
-
-a provedeme následující příkazy
-```
-gpg --keyserver pgpkeys.mit.edu --recv-key B4C86482705A2CE1
-gpg -a --export B4C86482705A2CE1 | apt-key add -
-apt-get update
-apt-get install locales
 ```
 
 ... a máme hotovo. Nyní můžeme využívat všechny dostupné _Debianí_ balíky, které jsou dostupné. (bohužel veliké množství balíků není k dispozici, ale je to dostatečné například k nainstalování aplikace Home Assistant pomocí pip3)
