@@ -8,7 +8,7 @@ Nejprve je třeba mít aktualizován Turris OS alespoň na verzi 3.0, tedy verzi
 
 Je třeba mít k dispozici vhodné úložiště pro kontejnery. Nejlepší je SSD, nebo HDD v SATA portu, stále dobré je totéž připojené přes USB. Když není jiného zbytí, lze použít buď SD kartu (v nativním slotu pod pamětí, či v USB), nebo obyčejný flash disk v USB. U flash disku, nebo SD karty je nutné počítat s možným brzkým opotřebením a pomalou odezvou. Interní NAND paměť Turrisu nelze použít už jen vzhledem ke kapacitě, dále proto, že po opotřebení nejde vyměnit.
 
-* Kontejnery nelze nainstalovat, pokud máte uložiště ve formátu FAT. Je potřeba použít například: btrfs, ext4 *
+* Kontejnery nelze nainstalovat, pokud máte uložiště ve formátu FAT. Je potřeba použít například: btrfs, ext4
 
 ## Situace ohledně distribucí
 
@@ -37,7 +37,7 @@ Jak OpenWRT, tak Turris OS v kontejneru mají jistě svá využití, nicméně n
     list lists 'lxc' 
     ```
     
-2. Instalace potřebných balíků provede updater
+2. Instalaci potřebných balíků provede updater
 
     ```
     updater.sh
