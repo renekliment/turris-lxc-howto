@@ -4,7 +4,7 @@
 
 Je potřeba mít vhodné uložiště pro kontejnery.
 
-Nejlepší je SSD, nebo HDD v SATA portu, stále dobré je totéž připojené přes USB. 
+Nejlepší je SSD nebo HDD připojené přes SATA (v miniPCIe řadiči), stále dobré je totéž připojené přes USB. 
 Když není jiného zbytí, lze použít buď SD kartu (v nativním slotu pod RAM nebo v USB čtečce), nebo obyčejný flash disk v USB. 
 
 U flash disku, nebo SD karty je nutné počítat s možným brzkým opotřebením a pomalou odezvou.
@@ -19,7 +19,7 @@ Vzhledem k architektuře procesoru v Turrisu (1.0 a 1.1) je bohužel výběr lin
 
 - OpenWRT,
 - Turris OS, 
-- a Debian PowerPCSPE, který je poměrně experimentální.
+- Debian PowerPCSPE, který je poměrně experimentální.
 
 Jak OpenWRT, tak Turris OS v kontejneru mají jistě svá využití, nicméně nejzajímavější je poslední možnost, která je rozebrána dále.
 
@@ -44,7 +44,7 @@ Jak OpenWRT, tak Turris OS v kontejneru mají jistě svá využití, nicméně n
      updater.sh
     ```
     
-3. Volitelná instalace textového editoru **vim** (pro upravování souborů lze také použít [WinSCP](https://winscp.net).
+3. Volitelná instalace textového editoru **vim** (pro upravování souborů lze také použít [WinSCP](https://winscp.net)).
 
     ```
     opkg install vim 
@@ -87,12 +87,7 @@ vim ./rootfs/etc/resolv.conf
 ```
 a upravíme adresu `127.0.0.1` na IP Turrise (výchozí `192.168.1.1`)
 
-Chceme, aby byl kontejner dostupný i v administračním rozhraní LuCI, odkud se dá také ovládat:
-```
-ln -s /mnt/disk/lxc-containers/debian1 /srv/lxc/debian1
-```
-
-Pokud chceme, aby byly kontejnery dostupné i v LuCI, kde s nimi můžeme manipulovat, tak jsou dvě možnosti:
+**Pokud chceme, aby byly kontejnery dostupné i v LuCI, kde s nimi můžeme manipulovat, tak jsou dvě možnosti:**
 
 1. Vytvoříme symlink
 ```
