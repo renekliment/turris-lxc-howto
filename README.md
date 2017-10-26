@@ -146,7 +146,7 @@ E: Sub-process http returned an error code (100)
 
 **Řešení**:
   * Počkat na novou verzi APT
-  * Downgrade z novější verze (1.6~alpha1) na starší, ale avšak funkční verzi 1.5~beta1
+  * Downgrade z novější verze 1.6-alpha1 na starší, ale avšak funkční verzi 1.5-beta1
 ```
 wget http://bloodkings.eu/uloziste/debian/apt_1.5~beta1_powerpcspe.deb
 wget http://bloodkings.eu/uloziste/debian/apt-utils_1.5~beta1_powerpcspe.deb
