@@ -4,10 +4,10 @@
 
 Je potřeba mít vhodné uložiště pro kontejnery.
 
-Nejlepší je SSD nebo HDD připojené přes SATA (v miniPCIe řadiči), stále dobré je totéž připojené přes USB. 
+Nejlepší je SSD nebo HDD připojené přes SATA (v miniPCIe), stále dobré je totéž připojené přes USB. 
 Když není jiného zbytí, lze použít buď SD kartu (v nativním slotu pod RAM nebo v USB čtečce), nebo obyčejný flash disk v USB. 
 
-U flash disku, nebo SD karty je nutné počítat s možným brzkým opotřebením a pomalou odezvou.
+U flash disku nebo SD karty je nutné počítat s možným brzkým opotřebením a pomalou odezvou.
 
 **Interní NAND paměť Turrisu nelze použít už jen vzhledem ke kapacitě, dále proto, že po opotřebení nejde vyměnit.**
 
@@ -15,7 +15,7 @@ Kontejnery nelze na instalovat na uložiště ve formátu FAT. Je tedy nutné po
 
 ## Situace ohledně distribucí
 
-Vzhledem k architektuře procesoru v Turrisu (1.0 a 1.1) je bohužel výběr linuxových distribucí poměrně dost omezený a to na:
+Vzhledem k použitému **procesoru Freescale P2020** a jeho architektuře **powerpcse** v **Turrisu 1.0 a 1.1** je bohužel výběr linuxových distribucí poměrně dost omezený a to na:
 
 - OpenWRT,
 - Turris OS, 
@@ -41,6 +41,7 @@ Jak OpenWRT, tak Turris OS v kontejneru mají jistě svá využití, nicméně n
 2. Spustíme updater.sh, aby nám nainstaloval balíčky LXC
 
      ```
+     opkg update
      updater.sh
     ```
     
@@ -81,7 +82,7 @@ wget https://raw.githubusercontent.com/renekliment/turris-lxc-howto/master/confi
 vim ./config
 ```
 
-Nastavíme DNS server pro kontejner:
+**Nastavíme DNS server pro kontejner:**
 ```
 vim ./rootfs/etc/resolv.conf
 ```
@@ -93,7 +94,7 @@ a upravíme adresu `127.0.0.1` na IP Turrise (výchozí `192.168.1.1`)
 ```
 ln -s /mnt/disk/lxc-containers/debian1 /srv/lxc/debian1
 ```
-2. Upravíme cestu lxc.lxcpath v souboru /etc/lxc/lxc.conf
+2. Upravíme cestu lxc.lxcpath v souboru `/etc/lxc/lxc.conf`
 
 
 Kontejner spustíme a připojíme se k jeho konzoli:
@@ -110,7 +111,9 @@ V souboru **/etc/config/lxc-auto** nastavíme jméno našeho kontejneru podle [o
 
 ## Známé chyby
 
-Před pár dny se odstranil balík **apt-transport-https**
+Balík **apt-transport-https**
+
+Před pár dny se odstranil balík z repozitáře Debianu
 
 ```
 I: Found additional required dependencies: fdisk libaudit-common libaudit1 libbz2-1.0 libcap-ng0 libdb5.3 libdebconfclient0 libgcrypt20 libgpg-error0 liblz4-1 libncursesw5 libsemanage-common libsemanage1 libsystemd0 libudev1
@@ -121,9 +124,35 @@ E: Couldn't find these debs: apt-transport-https
 
 **Řešení**:
   * Počkat na opravený debootstrap
-  * Spustit debootstrap s parametrem--exclude=apt-transport-https
-  * V souboru: ''/usr/share/debootstrap/scripts/sid'' odstranit řádek 38 - konkrétně ''apt-transport-https''
-  * Použít: http://deb.debian.org/debian-ports/
+  * Spustit debootstrap s parametrem --exclude=apt-transport-https
+```
+debootstrap --include debian-ports --exclude=apt-transport-https -archive-keyring --arch=powerpcspe sid rootfs https://deb.debian.org/debian-ports
+```
+  * Spustit deboostrap ze serveru http://deb.debian.org/debian-ports
+```
+debootstrap --include debian-ports -archive-keyring --arch=powerpcspe sid rootfs http://deb.debian.org/debian-ports
+```
+  * V souboru: ''/usr/share/debootstrap/scripts/sid'' odstranit řádek 38 konkrétně ''apt-transport-https''
+  
+APT
+
+```
+E: could not load seccomp policy: Invalid argument - HttpMethod::Configuration (22: Invalid argument)
+E: could not load seccomp policy: Invalid argument - HttpMethod::Configuration (22: Invalid argument)
+Reading package lists... Done
+E: Method http has died unexpectedly!
+E: Sub-process http returned an error code (100)
+```
+
+**Řešení**:
+  * Počkat na novou verzi APT
+  * Downgrade z novější verze (1.6~alpha1) na starší, ale avšak funkční verzi 1.5~beta1
+```
+wget http://bloodkings.eu/uloziste/debian/apt_1.5~beta1_powerpcspe.deb
+wget http://bloodkings.eu/uloziste/debian/apt-utils_1.5~beta1_powerpcspe.deb
+dpkg -i apt_1.5~beta1_powerpcspe.deb
+dpkg -i apt-utils_1.5~beta1_powerpcspe.deb
+```
 
 ## Použití LXC kontejnerů
 
